@@ -3,12 +3,24 @@ import ArticleList from './components/ArticleList';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import './App.css';
+import Article from './components/Article';
+import UserProfile from './components/UserProfile';
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
+//import SavedArticle from './components/SavedArticle';
+import { Route } from 'react-router-dom';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <h1> Welcome </h1>
+      <div className='router'>
+        <Header />
+        <Route exact path='/' component={ArticleList} />
+        <Route exact path='/Article' component = {Article} />
+        <Route exact path='/UserProfile/:id' component = {UserProfile} />
+        <Route exact path='/login' component = {Login} />
+        <Route exact path='/register' component = {Register} />
+        <Footer />
       </div>
     );
   }

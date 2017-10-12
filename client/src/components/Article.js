@@ -1,28 +1,35 @@
 import React, { Component } from 'react';
-
-import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
+import axios from 'axios';
+import cookies from 'cookies-js';
 
 class Article extends Component {
 
   constructor(props) {
 
     super(props);
-    this.state = {
-    title:  this.props.article.title,
-    author: this.props.article.author,
-    description: this.props.article.description,
-    url: this.props.article.url,
-    urlToImage: this.props.urlToImage,
-    publishedAt: this.props.publishedAt,
-    fireRedirect: false,
+      this.state = {
+      title:  this.props.article.title,
+      author: this.props.article.author,
+      description: this.props.article.description,
+      url: this.props.article.url,
+      urlToImage: this.props.article.urlToImage,
+      publishedAt: this.props.article.publishedAt,
+      fireRedirect: false,
     };
-    this.handleSubmit= this.handleSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
+    console.log(this.state.urlToImage);
+    let headers = {
+      'access-token': cookies.get('access-token'),
+      'client': cookies.get('client'),
+      'token-type': cookies.get('token-type'),
+      'uid': cookies.get('uid'),
+      'expiry': cookies.get('expiry')
+    };
     axios
       .post('http://localhost:3000/articles', {
         title: this.state.title,
@@ -30,12 +37,15 @@ class Article extends Component {
         description: this.state.description,
         url: this.state.url,
         urlToImage: this.state.urlToImage,
-        publishedAt: this.state.publishedAt
+        publishedAt: this.state.publishedAt,
+
+      }, {
+        headers: headers
       })
       .then(res => {
-        console.log(res);
+        console.log(res.data);
         this.setState({
-          newId: res.data.data.id,
+          newId: res.data.id,
           fireRedirect: true,
         });
       }).catch(err => console.log(err));
@@ -61,12 +71,12 @@ class Article extends Component {
                     <input type='hidden' name='description' value={this.props.article.description}/>
                     <input type='hidden' name='url' value={this.props.article.url} />
                     <input type='hidden' name='urlToImage' value={this.props.article.urlToImage} />
-                    <input type='hidden' name='publishedAt' value={this.props.publishedAt} />
-                    <input type='submit' placeholder='Add News To Your Account' />
+                    <input type='hidden' name='publishedAt' value={this.props.article.publishedAt} />
+                    <input type='submit' name='ADD' />
         </form>
 
-          {this.state.fireRedirect
-          ? <Redirect push to={`/UserProfile/${this.state.newId}`} />
+        {this.state.fireRedirect
+          ? <Redirect push to={`/login`} />
           : ''}
 
       </div>

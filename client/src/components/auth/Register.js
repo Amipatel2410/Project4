@@ -29,17 +29,42 @@ class Register extends Component{
 
     handleFormSubmit(e) {
         e.preventDefault();
-        axios
-            .post('http://localhost:3000/auth/register', {
-                username: this.state.username,
-                email: this.state.email,
-                password: this.state.password,
-            })
-            .then(res => {
-                this.props.history.push('/login', {});
-            })
-            .catch(err => console.log(err));
-        e.target.reset();
+        // axios
+        //     .post('http://localhost:3000/auth', {
+        //         username: this.state.username,
+        //         email: this.state.email,
+        //         password: this.state.password,
+        //         confirm_success_url: 'www.google.com'
+        //     })
+        //     .then(res => {
+        //         this.props.history.push('/login', {});
+        //     })
+        //     .catch(err => console.log(err));
+        // e.target.reset();
+
+         let fb = {
+//              "name": this.state.name,
+              "email": this.state.email,
+              "password": this.state.password,
+//              "password_confirmation": this.state.passwordConfirmation,
+              "confirm_success_url": 'www.google.com'
+//              "confirm_success_url": 'http://localhost:3000/confirm_success'
+    }
+    console.log('fb = ',fb);
+    axios('http://localhost:3000/auth', {
+      method: 'POST',
+      header: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      data: fb
+    })
+    .then(res => {
+      console.log(res)
+    })
+    .then(json => {
+      console.log(json,'<-----')
+      console.log(document.cookie)
+    })
+    .catch(err => console.log(err));
+
     }
 
     render() {

@@ -1,29 +1,53 @@
 import React, { Component } from 'react';
-
-import axios from 'axios';
-
 import { Link, Redirect } from 'react-router-dom';
+import axios from 'axios';
+import cookies from 'cookies-js';
 
 class UserProfile extends Component {
 
   constructor() {
     super();
     this.state = {
-      articleData: null,
+      articleData: '',
       articleDataLoaded: false,
       fireRedirect: false,
     }
-    this.deleteArticle = this.deleteArticle.bind(this);
+
+    this.deleteArticles = this.deleteArticles.bind(this);
   }
 
   componentDidMount() {
-    axios.get(`/articles/${this.props.match.params.id}`)
+    let headers = {
+      'access-token': cookies.get('access-token'),
+      'client': cookies.get('client'),
+      'token-type': cookies.get('token-type'),
+      'uid': cookies.get('uid'),
+      'expiry': cookies.get('expiry')
+    };
+    axios.get(
+      `http://localhost:3000/articles?user_id=${this.props.match.params.id}`,
+      { headers: headers }
+    )
+    .then(res => {
+      console.log(res.data);
+      this.setState({
+        articleDataLoaded: true,
+        articleData: res.data,
+      })
+    })
+    .catch(err => console.log(err));
+  }
+
+  deleteArticles(){
+    axios.delete(`/articles/${this.props.match.params.id}`)
       .then(res => {
+        console.log(res);
         this.setState({
-          articleDataLoaded: true,
-          articleData: res.data.data,
-        })
-      }).catch(err => console.log(err));
+          fireRedirect: true,
+        });
+      }).catch(err => {
+        console.log(err);
+      });
   }
 
   renderArticleOrLoading(){
@@ -32,12 +56,15 @@ class UserProfile extends Component {
       <div className="inner">
       <h1> Welcome user </h1>
         <div className="article_data_single">
-        <h1> Title: {this.props.article.title} </h1>
-        <h3> Author: {this.props.article.author} </h3>
-        <p> Description: {this.props.article.description} </p>
-        <a href={this.props.article.url}> Read More </a>
-        <img src={this.props.article.urlToImage} alt={this.props.article.author} height="100px" width="100px"/>
-        <p> PublishedAt: {this.props.article.publishedAt} </p>
+        <h1> {this.state.articleData.title} </h1>
+        <h3> {this.state.articleData.author} </h3>
+        <p>  {this.state.articleData.description} </p>
+        <a href={this.state.articleData.url}> Read More </a>
+        <img src={this.state.articleData.urlToImage} height="100px" width="100px"/>
+        <p>  {this.state.articleData.publishedAt} </p>
+        </div>
+        <div>
+            <span className="delete" onClick={this.deleteArticles}> Delete </span>
         </div>
       </div>
         )
