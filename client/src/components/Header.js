@@ -9,17 +9,19 @@ class Header extends Component {
         return(
             <div className='navBar'>
                 <span>
-                    <h1><span className="title_logo">
-                    <img src="./images/n1.jpg"  height="100px" width="300px" />
-                    Article World</span></h1>
+
+                    <span className="title_logo">
+                    <img src={require('./images/n1.jpg')}  height="100px" width="300px" />
+                    </span>
+
                     <div className="nav_links">
                     <Link to='/'>Home</Link>
                     <Link to='/register'>Register</Link>
                     <Link to='/login'>Login</Link>
                     <Link to='/'>Logout</Link>
                     </div>
-                </span>
 
+                </span>
             </div>
 
         )
