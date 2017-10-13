@@ -36,6 +36,7 @@ class Login extends Component{
             password: this.state.password,
         })
         .then(res => {
+          //setting cookies here
           cookies.set('access-token', res.headers["access-token"]);
           cookies.set('client', res.headers["client"]);
           cookies.set('token-type', res.headers["token-type"]);

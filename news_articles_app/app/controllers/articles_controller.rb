@@ -41,7 +41,16 @@ class ArticlesController < ApplicationController
 
  end
 
+  #def destroy
+  #  @article = Article.where(user_id: params[:user_id])
+ #   @article.destroy
+  #  render json: Article.all
+  #end
 
+  def destroy
+    Article.destroy(params[:id])
+    render json: Article.all
+  end
 
 
 

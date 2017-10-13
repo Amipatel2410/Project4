@@ -9,7 +9,9 @@ class Header extends Component {
         return(
             <div className='navBar'>
                 <span>
-                    <h1><span className="title_logo">Article World</span></h1>
+                    <h1><span className="title_logo">
+                    <img src="./images/n1.jpg"  height="100px" width="300px" />
+                    Article World</span></h1>
                     <div className="nav_links">
                     <Link to='/'>Home</Link>
                     <Link to='/register'>Register</Link>

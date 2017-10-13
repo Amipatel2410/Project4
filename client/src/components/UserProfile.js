@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import cookies from 'cookies-js';
+import ArticleDelete from './ArticleDelete';
 
 class UserProfile extends Component {
 
@@ -11,9 +12,17 @@ class UserProfile extends Component {
       articleData: '',
       articleDataLoaded: false,
       fireRedirect: false,
+      reloadPage: false,
     }
 
-    this.deleteArticles = this.deleteArticles.bind(this);
+    this.deletePage = this.deletePage.bind(this);
+
+  }
+
+  deletePage(){
+    console.log("hi");
+    this.componentDidMount();
+    this.setState ({reloadPage: true})
   }
 
   componentDidMount() {
@@ -34,46 +43,32 @@ class UserProfile extends Component {
         articleDataLoaded: true,
         articleData: res.data,
       })
+      console.log(res.data);
     })
     .catch(err => console.log(err));
   }
 
-  deleteArticles(){
-    axios.delete(`/articles/${this.props.match.params.id}`)
-      .then(res => {
-        console.log(res);
-        this.setState({
-          fireRedirect: true,
-        });
-      }).catch(err => {
-        console.log(err);
-      });
-  }
-
   renderArticleOrLoading(){
     if(this.state.articleDataLoaded) {
-      return(
-      <div className="inner">
-      <h1> Welcome user </h1>
-        <div className="article_data_single">
-        <h1> {this.state.articleData.title} </h1>
-        <h3> {this.state.articleData.author} </h3>
-        <p>  {this.state.articleData.description} </p>
-        <a href={this.state.articleData.url}> Read More </a>
-        <img src={this.state.articleData.urlToImage} height="100px" width="100px"/>
-        <p>  {this.state.articleData.publishedAt} </p>
-        </div>
-        <div>
-            <span className="delete" onClick={this.deleteArticles}> Delete </span>
-        </div>
-      </div>
+      return(this.state.articleData.map(article => {
+        return (
+
+            <ArticleDelete article = {article} deletePage = {this.deletePage}/>
+
+          );
+      })
+
         )
-    } else return <p className="loading"> Loading... </p>
+    } else return
+                  <p className="loading"> Loading... </p>
   }
+
+
 
   render() {
     return (
         <div className="article-single">
+          <h1> Welcome User </h1>
           {this.renderArticleOrLoading()}
         </div>
       )
