@@ -59,7 +59,7 @@ class ArticleSingle extends Component {
         </div>
 
         <div className="links">
-            <Link to={`/articles/${this.props.match.id}`}>Edit</Link>
+            <Link to={`/articles/${this.props.match.params.id}`}>Edit</Link>
             <Link to={`/UserProfile/${cookies.get('user_id')}`}>Back</Link>
         </div>
 

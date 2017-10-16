@@ -50,8 +50,8 @@ render() {
                 <h4> PublishedAt: {this.props.article.publishedAt} </h4>
                 <button type="submit" onClick={this.deleteArticles}> Delete </button>
 
-                <div>
-                <Link to={`/articles/${this.props.article.id}`}>Show</Link>
+                <div className="link_update">
+                <Link to={`/articles/${this.props.article.id}`}>Update</Link>
                 </div>
           </div>
 

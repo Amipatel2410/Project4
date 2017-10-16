@@ -68,7 +68,7 @@ class UserProfile extends Component {
   render() {
     return (
         <div className="userprofile_user">
-          <h1> Welcome User </h1>
+          <h1 className="heading"> Welcome User </h1>
           {this.renderArticleOrLoading()}
         </div>
       )

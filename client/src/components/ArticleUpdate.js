@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 import cookies from 'cookies-js';
+import { Link } from 'react-router-dom';
 
 class ArticleUpdate extends Component {
 
@@ -14,6 +16,7 @@ constructor(props)
     url: '',
     urlToImage: '',
     publishedAt: '',
+    fireRedirect: false,
   }
   this.updateArticles = this.updateArticles.bind(this);
   this.handleInputChange = this.handleInputChange.bind(this);
@@ -79,7 +82,11 @@ handleInputChange(e) {
         console.log(res);
         this.setState({
           newId: res.data.id,
+          fireRedirect: true,
+
         });
+        console.log(cookies.get('user_id'));
+        //console.log(this.state.newId);
 
       }).catch(err => {
         console.log(err);
@@ -89,9 +96,12 @@ handleInputChange(e) {
   render(){
     return(
         <div className="edit">
+
+            <h1 className="title"> Edit Form </h1>
+
             <form onSubmit={this.updateArticles}>
 
-              <label> Title:
+              <label> Title: <br/>
               <input
               type="text"
               placeholder="title"
@@ -100,7 +110,7 @@ handleInputChange(e) {
               onChange={this.handleInputChange} />
               </label>
               <br />
-              <label> Description:
+              <label> Description: <br />
               <input
               type="text"
               placeholder="description"
@@ -109,7 +119,7 @@ handleInputChange(e) {
               onChange={this.handleInputChange} />
               </label>
               <br />
-              <label> Author:
+              <label> Author: <br />
               <input
               type="text"
               placeholder="author"
@@ -118,7 +128,7 @@ handleInputChange(e) {
               onChange={this.handleInputChange} />
               </label>
               <br />
-              <label> Url:
+              <label> Url:  <br />
               <input
               type="text"
               placeholder="url"
@@ -127,7 +137,7 @@ handleInputChange(e) {
               onChange={this.handleInputChange} />
               </label>
               <br />
-              <label> urlToImage:
+              <label> urlToImage: <br />
               <input
               type="text"
               placeholder="urlToImage"
@@ -136,7 +146,7 @@ handleInputChange(e) {
               onChange={this.handleInputChange} />
               </label>
               <br />
-              <label> publishedAt
+              <label> publishedAt <br/>
               <input
               type="text"
               placeholder="publishedAt"
@@ -146,7 +156,18 @@ handleInputChange(e) {
               </label>
               <br />
               <input type="submit" value="Submit!" />
+
             </form>
+
+            {this.state.fireRedirect
+          ? <Redirect push to={`/UserProfile/${cookies.get('user_id')}`} />
+          : ''}
+
+             <div>
+            <Link className="back_link" to={`/UserProfile/${cookies.get('user_id')}`}>Back</Link>
+            </div>
+
+
         </div>
       );
   }

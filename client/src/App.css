@@ -341,6 +341,8 @@ body{
   font-size: 20px;
   color:#539bbc;
   text-decoration: none;
+  position: relative;
+  left: 150px;
 }
 .userprofile_single a:hover{
   color: #1cd1db;
@@ -365,6 +367,64 @@ body{
     left: 100px;
 }
 
+.edit {
+  height: auto;
+  position: relative;
+  left: 250px;
+}
+
+.edit h1{
+  font-family: 'Pacifico', cursive;
+  position: relative;
+  left: 110px;
+}
+
+.edit input[type=text] {
+      width: 400px;
+      padding: 16px 32px;
+      margin: 8px,0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 30px;
+      box-sizing: border-box;
+      font-size: 15px;
+}
+
+.edit input[type=submit] {
+    background-color: #e2d8c7;
+    color: black;
+    padding: 16px 32px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    width: 150px;
+    font-family: 'Pacifico', cursive;
+    font-size: 20px;
+    position: relative;
+    left: 110px;
+}
+
+.edit label{
+  font-family: 'Pacifico', cursive;
+  font-size: 20px;
+  position: relative;
+  left: 0px;
+}
+
+.edit .back_link {
+    font-family: 'Pacifico', cursive;
+    font-size: 25px;
+    text-decoration: none;
+    color: black;
+    position: relative;
+    left: 150px;
+}
+
+.userprofile_user .heading {
+  font-family: 'Pacifico', cursive;
+  text-align: center;
+}
 
 /* after search button display api data  */
 

@@ -19,7 +19,6 @@ class App extends Component {
         <Header />
         <Route exact path='/' component={ArticleList} />
         <Route exact path='/Article' component = {Article} />
-        <Route exact path='/articles/:id' component = {ArticleSingle} />
         <Route exact path='/articles/:id' component = {ArticleUpdate} />
         <Route exact path='/UserProfile/:id' component = {UserProfile} />
         <Route exact path='/login' component = {Login} />
