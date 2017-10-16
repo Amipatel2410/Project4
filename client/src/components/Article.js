@@ -56,14 +56,26 @@ class Article extends Component {
     return (
       <div className="main_article-data">
         <div className="article_data">
+
+        <div className="for_css1">
         <h1> Title: {this.props.article.title} </h1>
         <h3> Author: {this.props.article.author} </h3>
-        <p> Description: {this.props.article.description} </p>
+        <p className="title"> Description: </p>
+        <p className="des"> {this.props.article.description} </p>
         <a href={this.props.article.url}> Read More </a>
-        <img src={this.props.article.urlToImage} alt={this.props.article.author} height="100px" width="100px"/>
-        <p> PublishedAt: {this.props.article.publishedAt} </p>
+        <p className="publish"> PublishedAt: {this.props.article.publishedAt} </p>
+
         </div>
 
+        <div className="for_css2">
+        <img src={this.props.article.urlToImage} alt={this.props.article.author} height="250px" width="250px"/>
+        </div>
+
+
+
+
+
+        <div className="for_btn">
         <form onSubmit={(e) => this.handleSubmit(e) }>
 
                     <input type='hidden' name='title' value={this.props.article.title} />
@@ -74,12 +86,14 @@ class Article extends Component {
                     <input type='hidden' name='publishedAt' value={this.props.article.publishedAt} />
                     <input type='submit' name='ADD' />
         </form>
+        </div>
 
+        </div>
         {this.state.fireRedirect
-          ? <Redirect push to={`/login`} />
+          ? <Redirect push to={`/UserProfile/${cookies.get('user_id')}`} />
           : ''}
 
-      </div>
+    </div>
       );
   }
 

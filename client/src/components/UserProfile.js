@@ -3,6 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import cookies from 'cookies-js';
 import ArticleDelete from './ArticleDelete';
+import ArticleUpdate from './ArticleUpdate';
 
 class UserProfile extends Component {
 
@@ -52,9 +53,9 @@ class UserProfile extends Component {
     if(this.state.articleDataLoaded) {
       return(this.state.articleData.map(article => {
         return (
-
+            <div>
             <ArticleDelete article = {article} deletePage = {this.deletePage}/>
-
+            </div>
           );
       })
 
@@ -64,10 +65,9 @@ class UserProfile extends Component {
   }
 
 
-
   render() {
     return (
-        <div className="article-single">
+        <div className="userprofile_user">
           <h1> Welcome User </h1>
           {this.renderArticleOrLoading()}
         </div>

@@ -8,21 +8,14 @@ class ArticlesController < ApplicationController
         render json: @articles
     end
 
+
+
     def show
       @article = Article.find(params[:id])
       render json: @article
     end
 
 
- ## def create
-  ##  @article = Article.new(article_params)
-
-    #if @article.save
-    #  render json: @article
-   # else
-  #    render json: @article.errors, status: :unprocessable_entity
- #   end
-# end
 
  def create
     puts params[:urlToImage]
@@ -37,15 +30,22 @@ class ArticlesController < ApplicationController
       user_id: current_user.id
     )
     render json: { article: @article }
-
-
  end
 
-  #def destroy
-  #  @article = Article.where(user_id: params[:user_id])
- #   @article.destroy
-  #  render json: Article.all
-  #end
+
+
+  def edit
+    @article = Article.find(params[:id])
+  end
+
+  def update
+    @article = Article.find(params[:id])
+    @article.update(article_params)
+    render json: @article
+  end
+
+
+
 
   def destroy
     Article.destroy(params[:id])
@@ -55,8 +55,8 @@ class ArticlesController < ApplicationController
 
 
 
-  ##def article_params
-    ##params.permit(:title, :author, :description, :url, :urlToImage, :publishedAt)
-  ##end
+  def article_params
+    params.permit(:title, :author, :description, :url, :urlToImage, :publishedAt)
+  end
 
 end

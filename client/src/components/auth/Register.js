@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import registerimage from '../../images/newsr1.jpg';
 
 import { withRouter } from 'react-router';
 class Register extends Component{
@@ -69,13 +70,22 @@ class Register extends Component{
 
     render() {
         return (
-            <div className='container'>
+            <div className='register_page'>
 
+              <img src={registerimage} height="250px" width="250px" />
                 <form className="login-form" onSubmit={this.handleFormSubmit}>
-                <h2 className="login">Register</h2>
+                  <label>
+                  Enter Your Username <br />
                     <input  className="form-input" type="text" name='username' placeholder='username' value={this.state.username}onChange={this.handleInputChange}></input>
+                    </label> <br/>
+                    <label>
+                    Enter Your Email Id <br/>
                     <input  className="form-input" type="text" name='email' placeholder='email' value={this.state.email}onChange={this.handleInputChange}></input>
+                    </label> <br/>
+                    <label>
+                    Enter Your password <br />
                     <input  className="form-input" type="password" name='password' placeholder='password' value={this.state.password}onChange={this.handleInputChange}></input>
+                    </label > <br />
                     <button className="btn" type='submit'>Register</button>
                 </form>
             </div>

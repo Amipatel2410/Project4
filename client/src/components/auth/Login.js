@@ -3,6 +3,7 @@ import { withRouter } from 'react-router';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import cookies from 'cookies-js';
+import loginimage from '../../images/newsl1.jpg';
 
 class Login extends Component{
     constructor(){
@@ -42,6 +43,7 @@ class Login extends Component{
           cookies.set('token-type', res.headers["token-type"]);
           cookies.set('uid', res.headers["uid"]);
           cookies.set('expiry', res.headers["expiry"]);
+          cookies.set('user_id', res.data.data.id);
 
           console.log(res, 'this is res');
 
@@ -83,19 +85,24 @@ class Login extends Component{
         render(){
 
         return(
-            <div className='container'>
-                <h1 className="login">Login</h1>
-                <form className="login-form" onSubmit={(e) => this.handleFormSubmit(e)}>
+            <div className='login_page'>
 
+                <img src ={loginimage} height="250px" width="250px" />
+                <form className="login-form" onSubmit={(e) => this.handleFormSubmit(e)}>
+                  <label>
+                  Enter your Email Address <br/>
                     <input className="form-input" type='text' name='email' placeholder='Email' value={this.state.email} onChange={this.handleInputChange}></input>
+                  </label>
+                  <br />
+                  <label>
+                  Enter Your Password <br />
                     <input className="form-input"  type='password' name='password' placeholder='password' value={this.state.password} onChange={this.handleInputChange}></input>
+                  </label>
+                  <br />
                     <button className="btn" type='submit'>Login</button>
                 </form>
 
-                <span className="for_logout" onClick={this.handleDeleteuser}>Logout</span>
-                {this.state.fireRedirect
-                ? <Redirect push to="/" />
-                : ''}
+
 
                 {this.state.fireRedirect
           ? <Redirect push to={`/UserProfile/${this.state.userId}`} />

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import cookies from 'cookies-js';
+import { Link, Redirect } from 'react-router-dom';
+import ArticleSingle from './ArticleSingle';
 
 
 class ArticleDelete extends Component {
@@ -31,21 +33,26 @@ deleteArticles(){
       });
   }
 
+
+
 render() {
   return (
 
-          <div>
-            <h1>{this.props.article.title} </h1>
-               <h3> {this.props.article.author} </h3>
-               <p> {this.props.article.description} </p>
+          <div className="userprofile_data">
+
+          <div className="userprofile_single">
+                <h1>{this.props.article.title} </h1>
+                <img src={this.props.article.urlToImage} height="250px" width="250px" />
+                <h3> Author: {this.props.article.author} </h3>
+                <p> Description:</p>
+                <p> {this.props.article.description} </p>
                 <a href={this.props.article.url}> Read More </a>
-                <img src={this.props.article.urlToImage} height="200px" width="200px" />
-                <h4> {this.props.article.publishedAt} </h4>
+                <h4> PublishedAt: {this.props.article.publishedAt} </h4>
+                <button type="submit" onClick={this.deleteArticles}> Delete </button>
 
-          <div className="for_delete">
-
-               <button type="submit" onClick={this.deleteArticles}> Delete </button>
-
+                <div>
+                <Link to={`/articles/${this.props.article.id}`}>Show</Link>
+                </div>
           </div>
 
           </div>

@@ -9,6 +9,8 @@ import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 //import SavedArticle from './components/SavedArticle';
 import { Route } from 'react-router-dom';
+import ArticleSingle from './components/ArticleSingle';
+import ArticleUpdate from './components/ArticleUpdate';
 
 class App extends Component {
   render() {
@@ -17,6 +19,8 @@ class App extends Component {
         <Header />
         <Route exact path='/' component={ArticleList} />
         <Route exact path='/Article' component = {Article} />
+        <Route exact path='/articles/:id' component = {ArticleSingle} />
+        <Route exact path='/articles/:id' component = {ArticleUpdate} />
         <Route exact path='/UserProfile/:id' component = {UserProfile} />
         <Route exact path='/login' component = {Login} />
         <Route exact path='/register' component = {Register} />

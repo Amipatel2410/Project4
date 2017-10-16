@@ -54,17 +54,20 @@ class ArticleList extends Component {
     if (this.state.articleDataLoaded) {
       return this.state.articleData.map(article => {
         return(
+
             <Article key={article.id} article={article} />
+
+
           );
       });
     }
-    else return <p> Loading articleData...</p>
+    else return <div className="loading"> <p> Loading articleData...</p> </div>
   }
 
   render(){
     return(
         <div className="main_page">
-        <div className="searchbar_btn">
+        <div className="searchbar">
           <form className="search_form" onSubmit={this.handleSubmit}>
             <label>
             Choose Your Category:
@@ -77,6 +80,7 @@ class ArticleList extends Component {
             <button type="submit" onClick={this.getAPIarticles}> Search </button>
           </form>
         </div>
+
         <div className="articleapi_data">
           {this.renderArticleData()}
         </div>
